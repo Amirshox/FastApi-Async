@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import FastAPI, Depends, status
+from fastapi import FastAPI, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
 from database import engine, SessionLocal
@@ -28,6 +28,15 @@ def get_articles(db: Session = Depends(get_db)):
     return articles
 
 
+@app.get("/articles/{id}", response_model=GetArticleScheme)
+def get_article(id: int, db: Session = Depends(get_db)):
+    # article = db.query(models.Article).filter(models.Article.id == id).first()
+    article = db.query(models.Article).get(id)
+    if article:
+        return article
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Article Does Not Exist!")
+
+
 @app.post("/articles/", status_code=status.HTTP_201_CREATED)
 def create_article(article: ArticleScheme, db: Session = Depends(get_db)):
     article = models.Article(title=article.title, description=article.description)
@@ -35,3 +44,18 @@ def create_article(article: ArticleScheme, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(article)
     return article
+
+
+@app.put("/articles/{id}", status_code=status.HTTP_202_ACCEPTED)
+def update_article(id, article: ArticleScheme, db: Session = Depends(get_db)):
+    db.query(models.Article).filter(models.Article.id == id).update(
+        {'title': article.title, 'description': article.description}
+    )
+    db.commit()
+    return article
+
+
+@app.delete("/articles/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_article(id, db: Session = Depends(get_db)):
+    db.query(models.Article).filter(models.Article.id == id).delete(synchronize_session=False)
+    db.commit()
