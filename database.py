@@ -1,10 +1,26 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import (
+    Column,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    create_engine
+)
 
-SQLALCHEMY_DATABASE_URL = "postgresql://admin:1@localhost/medium"
+from databases import Database
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+DATABASE_URL = "postgresql://admin:1@localhost/medium"
 
-Base = declarative_base()
+engine = create_engine(DATABASE_URL)
+metadata = MetaData()
+
+Article = Table(
+    "article",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("title", String(199)),
+    Column("description", String(199)),
+)
+
+
+
