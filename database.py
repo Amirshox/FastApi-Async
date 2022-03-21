@@ -22,5 +22,4 @@ Article = Table(
     Column("description", String(199)),
 )
 
-
-
+database = Database(DATABASE_URL)
