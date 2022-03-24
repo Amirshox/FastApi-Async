@@ -25,3 +25,7 @@ class GetUserScheme(BaseModel):
 
 class LoginScheme(UserScheme):
     pass
+
+
+class TokenDataScheme(GetUserScheme):
+    pass
