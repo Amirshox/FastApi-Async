@@ -11,3 +11,17 @@ class GetArticleScheme(ArticleScheme):
 
     class Config:
         orm_mode = True
+
+
+class UserScheme(BaseModel):
+    username: str
+    password: str
+
+
+class GetUserScheme(BaseModel):
+    id: int
+    username: str
+
+
+class LoginScheme(UserScheme):
+    pass

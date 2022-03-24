@@ -6,7 +6,9 @@ from fastapi import status, HTTPException
 from database import Article, database
 from schemas import ArticleScheme, GetArticleScheme
 
-router = APIRouter()
+router = APIRouter(
+    tags=["Articles"]
+)
 
 
 @router.post("/articles/", status_code=status.HTTP_201_CREATED)
