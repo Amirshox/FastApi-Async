@@ -6,6 +6,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
+from users import User
 from schemas import TokenDataScheme
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
@@ -38,10 +39,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         token_data = TokenDataScheme(username=username)
     except JWTError:
         raise credentials_exception
-    user = get_user(fake_users_db, username=token_data.username)
-    if user is None:
-        raise credentials_exception
-    return user
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
