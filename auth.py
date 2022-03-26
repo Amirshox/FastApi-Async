@@ -2,7 +2,8 @@ from typing import List
 
 from passlib.hash import pbkdf2_sha256
 
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from schemas import LoginScheme
 from database import User, database
@@ -12,7 +13,7 @@ router = APIRouter(tags=["Auth"])
 
 
 @router.post("/login/")
-async def login(request: LoginScheme):
+async def login(request: OAuth2PasswordRequestForm = Depends()):
     query = User.select().where(User.c.username == request.username)
     user = await database.fetch_one(query=query)
 
