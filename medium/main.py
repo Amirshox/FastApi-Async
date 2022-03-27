@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-import auth
+from . import auth
 from routers import articles, users
 from database import engine, metadata, database
 
