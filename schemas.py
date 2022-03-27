@@ -1,31 +1,31 @@
 from pydantic import BaseModel
 
 
-class ArticleScheme(BaseModel):
+class ArticleSchema(BaseModel):
     title: str
     description: str
 
 
-class GetArticleScheme(ArticleScheme):
+class GetArticleSchema(ArticleSchema):
     id: int
 
     class Config:
         orm_mode = True
 
 
-class UserScheme(BaseModel):
+class UserSchema(BaseModel):
     username: str
     password: str
 
 
-class GetUserScheme(BaseModel):
+class GetUserSchema(BaseModel):
     id: int
     username: str
 
 
-class LoginScheme(UserScheme):
+class LoginSchema(UserScheme):
     pass
 
 
-class TokenDataScheme(BaseModel):
+class TokenDataSchema(BaseModel):
     username: str

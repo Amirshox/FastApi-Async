@@ -3,9 +3,8 @@ from typing import List
 from passlib.hash import pbkdf2_sha256
 
 from fastapi import APIRouter, status, HTTPException, Depends
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import  OAuth2PasswordRequestForm
 
-from schemas import LoginScheme
 from database import User, database
 from token_ import create_access_token
 
