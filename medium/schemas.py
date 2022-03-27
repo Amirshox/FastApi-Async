@@ -23,7 +23,7 @@ class GetUserSchema(BaseModel):
     username: str
 
 
-class LoginSchema(UserScheme):
+class LoginSchema(UserSchema):
     pass
 
 

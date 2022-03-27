@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
-import articles
-import users
 import auth
+from routers import articles, users
 from database import engine, metadata, database
 
 metadata.create_all(bind=engine)

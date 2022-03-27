@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 # from users import User
-from schemas import TokenDataScheme
+from schemas import TokenDataSchema
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
@@ -36,7 +36,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = TokenDataScheme(username=username)
+        token_data = TokenDataSchema(username=username)
     except JWTError:
         raise credentials_exception
     return token_data
