@@ -5,9 +5,9 @@ from fastapi import status, HTTPException
 
 from passlib.hash import pbkdf2_sha256
 
-from database import User, database
-from schemas import UserSchema, GetUserSchema
-from token_ import get_current_user
+from medium.database import User, database
+from medium.schemas import UserSchema, GetUserSchema
+from medium.token_ import get_current_user
 
 router = APIRouter(tags=["Users"])
 

@@ -3,9 +3,9 @@ from typing import List
 from fastapi import APIRouter, Depends
 from fastapi import status, HTTPException
 
-from database import Article, database
-from schemas import ArticleSchema, GetArticleSchema, UserSchema
-from token_ import get_current_user
+from medium.database import Article, database
+from medium.schemas import ArticleSchema, GetArticleSchema, UserSchema
+from medium.token_ import get_current_user
 
 router = APIRouter(
     tags=["Articles"]
